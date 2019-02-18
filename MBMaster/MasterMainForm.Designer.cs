@@ -35,6 +35,8 @@
       this.idTB = new System.Windows.Forms.TextBox();
       this.readTB = new System.Windows.Forms.TextBox();
       this.countNUD = new System.Windows.Forms.NumericUpDown();
+      this.label4 = new System.Windows.Forms.Label();
+      this.slaveIpTB = new System.Windows.Forms.TextBox();
       ((System.ComponentModel.ISupportInitialize)(this.countNUD)).BeginInit();
       this.SuspendLayout();
       // 
@@ -158,11 +160,32 @@
             0,
             0});
       // 
+      // label4
+      // 
+      this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+      this.label4.AutoSize = true;
+      this.label4.Location = new System.Drawing.Point(538, 28);
+      this.label4.Name = "label4";
+      this.label4.Size = new System.Drawing.Size(50, 13);
+      this.label4.TabIndex = 13;
+      this.label4.Text = "Slave IP:";
+      // 
+      // slaveIpTB
+      // 
+      this.slaveIpTB.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+      this.slaveIpTB.Location = new System.Drawing.Point(611, 25);
+      this.slaveIpTB.Name = "slaveIpTB";
+      this.slaveIpTB.Size = new System.Drawing.Size(100, 20);
+      this.slaveIpTB.TabIndex = 12;
+      this.slaveIpTB.Text = "192.168.1.11";
+      // 
       // MasterMainForm
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.ClientSize = new System.Drawing.Size(723, 251);
+      this.Controls.Add(this.label4);
+      this.Controls.Add(this.slaveIpTB);
       this.Controls.Add(this.countNUD);
       this.Controls.Add(this.readTB);
       this.Controls.Add(this.label3);
@@ -199,6 +222,8 @@
     private System.Windows.Forms.TextBox idTB;
     private System.Windows.Forms.TextBox readTB;
     private System.Windows.Forms.NumericUpDown countNUD;
+    private System.Windows.Forms.Label label4;
+    private System.Windows.Forms.TextBox slaveIpTB;
   }
 }
 

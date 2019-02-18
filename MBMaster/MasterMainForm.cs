@@ -33,7 +33,7 @@ namespace MBMaster {
         MessageBox.Show("Bad ID");
         return;
       }
-      tcpCfg = new TCPCommConfig() { addressMajor = "127.0.0.1", addressMinor = 502, devId = devId, name = "", pollDelay = 100, retryCnt = 3, timeout = 3000 };
+      tcpCfg = new TCPCommConfig() { addressMajor = slaveIpTB.Text, addressMinor = 502, devId = devId, name = "", pollDelay = 100, retryCnt = 3, timeout = 3000 };
       if (!masterPLC.Connect(ProtocolTypeEnum.TCP, tcpCfg, out errorStr)) {
         MessageBox.Show($@"Failed connecting Master ({tcpCfg.devId}) : {errorStr}");
         return;
