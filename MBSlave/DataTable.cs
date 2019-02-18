@@ -36,5 +36,25 @@ namespace MBSlave {
       return true;
     }
 
+    protected override bool readInputDiscretesTable(int startRef, bool[] bitArr){
+      OnLog?.Invoke($"readInputDiscretesTable: {startRef}/{bitArr.Length}");
+      return true;
+    }
+
+    protected override bool readInputRegistersTable(int startRef, short[] regArr){
+      OnLog?.Invoke($"readInputRegistersTable: {startRef}/{regArr.Length}");
+      return true;
+    }
+
+    protected override bool readCoilsTable(int startRef, bool[] bitArr){
+      OnLog?.Invoke($"readCoilsTable: {startRef}/{bitArr.Length}");
+      return true;
+    }
+
+    protected override bool writeCoilsTable(int startRef, bool[] bitArr){
+      OnLog?.Invoke($"writeCoilsTable: {startRef}/{bitArr.Length}");
+      return true;
+    }
+
   }
 }

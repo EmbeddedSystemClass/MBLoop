@@ -27,7 +27,7 @@ namespace MBSlave {
 
     private void MainForm_Load(object sender, EventArgs e) {
       bContinue = true;
-      protocol.startupServer();
+      protocol.startupServer("");
       serverThread = new Task(ServerLoop);
       serverThread.Start();
       Log($"Server started = {protocol.isStarted()}");
