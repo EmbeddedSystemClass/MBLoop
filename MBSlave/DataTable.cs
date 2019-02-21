@@ -14,45 +14,55 @@ namespace MBSlave {
     private const int DATALEN = 32;
     private short[] data = Enumerable.Repeat((short) 0, DATALEN).ToArray();
 
+    short counter = 0;
+
     protected override bool readHoldingRegistersTable(Int32 startRef, Int16[] regArr) {
       if (startRef < STARTADD || startRef > STARTADD + DATALEN || startRef + regArr.Length > STARTADD + DATALEN) {
-        OnLog?.Invoke($"Read ERR St: {startRef}, Sz: {regArr.Length}");
+        //OnLog?.Invoke($"Read ERR St: {startRef}, Sz: {regArr.Length}");
         return false;
       }
       for (int idx = 0; idx < regArr.Length; idx++)
         regArr[idx] = data[idx];
-      OnLog?.Invoke($"Read St: {startRef}, Sz: {regArr.Length}, Data: {string.Join(",", regArr)}");
+      float f = counter/10.0f;
+      counter++;
+      byte [] bts = BitConverter.GetBytes(f);//.Reverse().ToArray();
+      regArr[0]=BitConverter.ToInt16(bts,0);
+      regArr[1]=BitConverter.ToInt16(bts,2);
+
+      if (counter >36000)
+        counter = 0;
+      //OnLog?.Invoke($"Read St: {startRef}, Sz: {regArr.Length}, Data: {string.Join(",", regArr)}");
       return true;
     }
 
     protected override bool writeHoldingRegistersTable(int startRef, short[] regArr) {
       if (startRef < STARTADD || startRef > STARTADD + DATALEN || startRef + regArr.Length > STARTADD + DATALEN) {
-        OnLog?.Invoke($"Write ERR St: {startRef}, Sz: {regArr.Length}");
+        //OnLog?.Invoke($"Write ERR St: {startRef}, Sz: {regArr.Length}");
         return false;
       }
       for (int idx = 0; idx < regArr.Length; idx++)
         data[idx] = regArr[idx];
-      OnLog?.Invoke($"Write St: {startRef}, Sz: {regArr.Length}, Data: {string.Join(",", regArr)}");
+      //OnLog?.Invoke($"Write St: {startRef}, Sz: {regArr.Length}, Data: {string.Join(",", regArr)}");
       return true;
     }
 
     protected override bool readInputDiscretesTable(int startRef, bool[] bitArr){
-      OnLog?.Invoke($"readInputDiscretesTable: {startRef}/{bitArr.Length}");
+      //OnLog?.Invoke($"readInputDiscretesTable: {startRef}/{bitArr.Length}");
       return true;
     }
 
     protected override bool readInputRegistersTable(int startRef, short[] regArr){
-      OnLog?.Invoke($"readInputRegistersTable: {startRef}/{regArr.Length}");
+      //OnLog?.Invoke($"readInputRegistersTable: {startRef}/{regArr.Length}");
       return true;
     }
 
     protected override bool readCoilsTable(int startRef, bool[] bitArr){
-      OnLog?.Invoke($"readCoilsTable: {startRef}/{bitArr.Length}");
+      //OnLog?.Invoke($"readCoilsTable: {startRef}/{bitArr.Length}");
       return true;
     }
 
     protected override bool writeCoilsTable(int startRef, bool[] bitArr){
-      OnLog?.Invoke($"writeCoilsTable: {startRef}/{bitArr.Length}");
+      //OnLog?.Invoke($"writeCoilsTable: {startRef}/{bitArr.Length}");
       return true;
     }
 
