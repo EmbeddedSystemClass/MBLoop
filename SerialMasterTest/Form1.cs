@@ -30,7 +30,7 @@ namespace SerialMasterTest {
       SerialCommConfig sc = new SerialCommConfig() {name = "sercomm",
         addressMajor = commPortTB.Text, addressMinor = (int) baudNUD.Value, devId = (int) devidNUD.Value,
         dataBits = MBDataBitsEnum.SER_DATABITS_8, parity = MBParityEnum.SER_PARITY_NONE, 
-        stopBits = MBStopBitsEnum.SER_STOPBITS_1, pollDelay = 3, retryCnt = 3, timeout = 100};
+        stopBits = MBStopBitsEnum.SER_STOPBITS_1, pollDelay = 1, retryCnt = 3, timeout = 100};
       if (!serConn.Connect(sc, out errorStr)) {
         MessageBox.Show("Error: " + errorStr);
         return;
@@ -71,13 +71,9 @@ namespace SerialMasterTest {
       byte [] bts = new byte[4];
       byte[] bts0 = BitConverter.GetBytes(data[0]);
       byte[] bts1 = BitConverter.GetBytes(data[1]);
-
-      bts[0] = bts0[0];
-      bts[1] = bts0[1];
-      bts[2] = bts1[0];
-      bts[3] = bts1[1];
+      byte[] ordBts = new byte[] {bts1[0], bts1[1], bts0[0], bts0[1]};
       
-      int ang1000 = BitConverter.ToInt32(bts, 0);
+      int ang1000 = BitConverter.ToInt32(ordBts, 0);
       double temprat = data[2] / 100.0;
       double rtm = sw.ElapsedMilliseconds * 1.0 / loops;
       outputLBL.Text = $"Inc: {ang1000 / 1000.0}, Temp: {temprat}, Read time: {rtm}";

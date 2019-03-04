@@ -57,7 +57,7 @@
       this.commPortTB.Name = "commPortTB";
       this.commPortTB.Size = new System.Drawing.Size(100, 20);
       this.commPortTB.TabIndex = 1;
-      this.commPortTB.Text = "COM6";
+      this.commPortTB.Text = "COM4";
       // 
       // label2
       // 
