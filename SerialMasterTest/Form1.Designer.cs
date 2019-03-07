@@ -151,7 +151,6 @@
       // 
       // writeBTN
       // 
-      this.writeBTN.Enabled = false;
       this.writeBTN.Location = new System.Drawing.Point(41, 116);
       this.writeBTN.Name = "writeBTN";
       this.writeBTN.Size = new System.Drawing.Size(75, 23);
@@ -173,6 +172,11 @@
       // addressNUD
       // 
       this.addressNUD.Location = new System.Drawing.Point(157, 119);
+      this.addressNUD.Maximum = new decimal(new int[] {
+            9999999,
+            0,
+            0,
+            0});
       this.addressNUD.Name = "addressNUD";
       this.addressNUD.Size = new System.Drawing.Size(90, 20);
       this.addressNUD.TabIndex = 12;

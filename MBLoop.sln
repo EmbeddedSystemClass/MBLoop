@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MBSlave", "MBSlave\MBSlave.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SerialMasterTest", "SerialMasterTest\SerialMasterTest.csproj", "{95687FFE-3694-4314-850B-B3B11E74B2DE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModbusScanner", "ModbusScanner\ModbusScanner.csproj", "{C3CD3DA5-1399-48FD-8E00-272FB132AC7F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,6 +43,14 @@ Global
 		{95687FFE-3694-4314-850B-B3B11E74B2DE}.Release|Any CPU.Build.0 = Release|Any CPU
 		{95687FFE-3694-4314-850B-B3B11E74B2DE}.Release|x86.ActiveCfg = Release|Any CPU
 		{95687FFE-3694-4314-850B-B3B11E74B2DE}.Release|x86.Build.0 = Release|Any CPU
+		{C3CD3DA5-1399-48FD-8E00-272FB132AC7F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C3CD3DA5-1399-48FD-8E00-272FB132AC7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C3CD3DA5-1399-48FD-8E00-272FB132AC7F}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{C3CD3DA5-1399-48FD-8E00-272FB132AC7F}.Debug|x86.Build.0 = Debug|Any CPU
+		{C3CD3DA5-1399-48FD-8E00-272FB132AC7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C3CD3DA5-1399-48FD-8E00-272FB132AC7F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C3CD3DA5-1399-48FD-8E00-272FB132AC7F}.Release|x86.ActiveCfg = Release|Any CPU
+		{C3CD3DA5-1399-48FD-8E00-272FB132AC7F}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

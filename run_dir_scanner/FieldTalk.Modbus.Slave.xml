@@ -1,0 +1,1447 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>FieldTalk.Modbus.Slave</name>
+    </assembly>
+    <members>
+        <member name="T:FieldTalk.Modbus.Slave.DllImport">
+            <exclude/>
+        </member>
+        <member name="F:FieldTalk.Modbus.Slave.DllImport.DLL_NAME">
+            <exclude/>
+        </member>
+        <member name="M:FieldTalk.Modbus.Slave.DllImport.loadDll">
+            <exclude/>
+        </member>
+        <member name="T:FieldTalk.Modbus.Slave.BusProtocolErrors">
+            <summary> Protocol Errors and Modbus exceptions codes </summary>
+            <remarks>
+            Definition of error codes returned by the FieldTalk functions.
+            The error code can be converted to a UNICODE error text using the
+            function BusProtocolErrors.getBusProtocolErrorText.
+            </remarks>
+            <threadsafety static="true" instance="true"/>
+        </member>
+        <member name="M:FieldTalk.Modbus.Slave.BusProtocolErrors.#cctor">
+            <exclude/>
+        </member>
+        <member name="F:FieldTalk.Modbus.Slave.BusProtocolErrors.FTALK_SUCCESS">
+            <summary> Operation was successful </summary>
+            <remarks>
+            This return codes indicates no error.
+            </remarks>
+        </member>
+        <member name="F:FieldTalk.Modbus.Slave.BusProtocolErrors.FTALK_ILLEGAL_ARGUMENT_ERROR">
+            <summary> Illegal argument error </summary>
+            <remarks>
+            A parameter passed to the function returning this error code is invalid
+            or out of range.
+            </remarks>
+        </member>
+        <member name="F:FieldTalk.Modbus.Slave.BusProtocolErrors.FTALK_ILLEGAL_STATE_ERROR">
+            <summary> Illegal state error </summary>
+            <remarks>
+            The function is called in a wrong state. This return code is returned by
+            all functions if the protocol has not been opened succesfully yet.
+            </remarks>
+        </member>
+        <member name="F:FieldTalk.Modbus.Slave.BusProtocolErrors.FTALK_EVALUATION_EXPIRED">
+            <summary> Evaluation expired </summary>
+            <remarks>
+            This version of the library is a function limited evaluation version
+            and has now expired.
+            </remarks>
+        </member>
+        <member name="F:FieldTalk.Modbus.Slave.BusProtocolErrors.FTALK_IO_ERROR_CLASS">
+            <summary> IO error class </summary>
+            <remarks>
+            Errors of this class signal a problem in conjunction with the IO
+            system.
+            </remarks>
+        </member>
+        <member name="F:FieldTalk.Modbus.Slave.BusProtocolErrors.FTALK_IO_ERROR">
+            <summary> IO error </summary>
+            <remarks>
+            The underlaying IO system reported an error.
+            </remarks>
+        </member>
+        <member name="F:FieldTalk.Modbus.Slave.BusProtocolErrors.FTALK_OPEN_ERR">
+            <summary> Port or socket open error </summary>
+            <remarks>
+            The TCPIP socket or the serial port could not be opened. In case of a
+            serial port it indicates that the serial port does not exist on the
+            system.
+            </remarks>
+        </member>
+        <member name="F:FieldTalk.Modbus.Slave.BusProtocolErrors.FTALK_PORT_ALREADY_OPEN">
+            <summary> Serial port already open </summary>
+            <remarks>
+            The serial port defined for the open operation is already opened by
+            another application.
+            </remarks>
+        </member>
+        <member name="F:FieldTalk.Modbus.Slave.BusProtocolErrors.FTALK_TCPIP_CONNECT_ERR">
+            <summary> TCPIP connection error </summary>
+            <remarks>
+            Signals that the TCPIP connection could not be established.
+            Typically this error occurs when a host does not exist on the network or
+            the IP address or host name is wrong. The remote host must also listen
+            on the appropriate port.
+            </remarks>
+        </member>
+        <member name="F:FieldTalk.Modbus.Slave.BusProtocolErrors.FTALK_CONNECTION_WAS_CLOSED">
+            <summary> Remote peer closed TCPIP connection </summary>
+            <remarks>
+            Signals that the TCPIP connection was closed by the remote peer or is
+            broken.
+            </remarks>
+        </member>
+        <member name="F:FieldTalk.Modbus.Slave.BusProtocolErrors.FTALK_SOCKET_LIB_ERROR">
+            <summary> Socket library error </summary>
+            <remarks>
+            The TCPIP socket library (eg WINSOCK) could not be loaded or the DLL
+            is missing or not installed.
+            </remarks>
+        </member>
+        <member name="F:FieldTalk.Modbus.Slave.BusProtocolErrors.FTALK_PORT_ALREADY_BOUND">
+            <summary> TCP port already bound </summary>
+            <remarks>
+            Indicates that the specified TCP port cannot be bound. The port might
+            already be taken by another application or hasn't been released yet by
+            the TCPIP stack for re-use.
+            </remarks>
+        </member>
+        <member name="F:FieldTalk.Modbus.Slave.BusProtocolErrors.FTALK_LISTEN_FAILED">
+            <summary> Listen failed </summary>
+            <remarks>
+            The listen operation on the specified TCP port failed..
+            </remarks>
+        </member>
+        <member name="F:FieldTalk.Modbus.Slave.BusProtocolErrors.FTALK_FILEDES_EXCEEDED">
+            <summary> File descriptors exceeded </summary>
+            <remarks>
+            Maximum number of usable file descriptors exceeded.
+            </remarks>
+        </member>
+        <member name="F:FieldTalk.Modbus.Slave.BusProtocolErrors.FTALK_PORT_NO_ACCESS">
+            <summary> No permission to access serial port or TCP port </summary>
+            <remarks>
+            You don't have permission to access the serial port or TCP port. Run the
+            program as root. If the error is related to a serial port, change the
+            access privilege. If it is related to TCPIP use TCP port number which
+            is outside the IPPORT_RESERVED range.
+            </remarks>
+        </member>
+        <member name="F:FieldTalk.Modbus.Slave.BusProtocolErrors.FTALK_PORT_NOT_AVAIL">
+            <summary> TCP port not available </summary>
+            <remarks>
+            The specified TCP port is not available on this machine.
+            </remarks>
+        </member>
+        <member name="F:FieldTalk.Modbus.Slave.BusProtocolErrors.FTALK_BUS_PROTOCOL_ERROR_CLASS">
+            <summary> Fieldbus protocol error class </summary>
+            <remarks>
+            Signals that a fieldbus protocol related error has
+            occured. This class is the general class of errors produced by
+            failed or interrupted data transfer functions. It is also produced when
+            receiving invalid frames or exception responses.
+            </remarks>
+        </member>
+        <member name="F:FieldTalk.Modbus.Slave.BusProtocolErrors.FTALK_CHECKSUM_ERROR">
+            <summary> Checksum error </summary>
+            <remarks>
+            Signals that the checksum of a received frame is invalid.
+            A poor data link typically causes this error.
+            </remarks>
+        </member>
+        <member name="F:FieldTalk.Modbus.Slave.BusProtocolErrors.FTALK_INVALID_FRAME_ERROR">
+            <summary> Invalid frame error </summary>
+            <remarks>
+            Signals that a received frame does not correspond either by structure or
+            content to the specification or does not match a previously sent query
+            frame. A poor data link typically causes this error.
+            </remarks>
+        </member>
+        <member name="F:FieldTalk.Modbus.Slave.BusProtocolErrors.FTALK_INVALID_REPLY_ERROR">
+            <summary> Invalid reply error </summary>
+            <remarks>
+            Signals that a received reply does not correspond
+            to the specification.
+            </remarks>
+        </member>
+        <member name="F:FieldTalk.Modbus.Slave.BusProtocolErrors.FTALK_REPLY_TIMEOUT_ERROR">
+            <summary> Reply time-out </summary>
+            <remarks>
+            Signals that a fieldbus data transfer timed out. This can occur if the
+            slave device does not reply in time or does not reply at all. A wrong
+            unit adress will also cause this error. In some occasions this exception
+            is also produced if the characters received don't constitute a complete
+            frame.
+            </remarks>
+        </member>
+        <member name="F:FieldTalk.Modbus.Slave.BusProtocolErrors.FTALK_SEND_TIMEOUT_ERROR">
+            <summary> Send time-out </summary>
+            <remarks>
+            Signals that a fieldbus data send timed out. This can only occur if the
+            handshake lines are not properly set.
+            </remarks>
+        </member>
+        <member name="F:FieldTalk.Modbus.Slave.BusProtocolErrors.FTALK_MBUS_EXCEPTION_RESPONSE">
+            <summary> Modbus exception response </summary>
+            <remarks>
+            Signals that a Modbus exception response was received. Exception
+            responses are sent by a slave device instead of a normal response
+            message if it received the query message correctly but cannot handle the
+            query. This error usually occurs if a master queried an invalid or
+            non-existing data address or if the master used a Modbus function, which
+            is not supported by the slave device.
+            </remarks>
+        </member>
+        <member name="F:FieldTalk.Modbus.Slave.BusProtocolErrors.FTALK_MBUS_ILLEGAL_FUNCTION_RESPONSE">
+            <summary> Illegal Function exception response </summary>
+            <remarks>
+            Signals that an Illegal Function exception response (code 01) was
+            received. This exception response is sent by a slave device instead of a
+            normal response message if a master sent a Modbus function, which is not
+            supported by the slave device.
+            </remarks>
+        </member>
+        <member name="F:FieldTalk.Modbus.Slave.BusProtocolErrors.FTALK_MBUS_ILLEGAL_ESS_RESPONSE">
+            <summary> Illegal Data address exception response </summary>
+            <remarks>
+            Signals that an Illegal Data address exception response (code 02)
+            was received. This exception response is sent by a slave device instead
+            of a normal response message if a master queried an invalid or
+            non-existing data ess.
+            </remarks>
+        </member>
+        <member name="F:FieldTalk.Modbus.Slave.BusProtocolErrors.FTALK_MBUS_ILLEGAL_VALUE_RESPONSE">
+            <summary> Illegal Data Value exception response </summary>
+            <remarks>
+            Signals that a Illegal Value exception response was (code 03)
+            received. This exception response is sent by a slave device instead of
+            a normal response message if a master sent a data value, which is not an
+            allowable value for the slave device.
+            </remarks>
+        </member>
+        <member name="F:FieldTalk.Modbus.Slave.BusProtocolErrors.FTALK_MBUS_SLAVE_FAILURE_RESPONSE">
+            <summary> Slave Device Failure exception response </summary>
+            <remarks>
+            Signals that a Slave Device Failure exception response (code 04) was
+            received. This exception response is sent by a slave device instead of a
+            normal response message if an unrecoverable error occured while
+            processing the requested action. This response is also sent if the
+            request would generate a response whose size exceeds the allowable data
+            size.
+            </remarks>
+        </member>
+        <member name="M:FieldTalk.Modbus.Slave.BusProtocolErrors.getBusProtocolErrorText(System.Int32)">
+            <summary> Returns string description of an error code </summary>
+            <param name="errCode"> FieldTalk error code </param>
+            <returns> Error text string </returns>
+        </member>
+        <member name="T:FieldTalk.Modbus.Slave.MbusDataTableInterface">
+            <summary>
+            This class defines the interface between a Modbus slave
+            Server Engine and your application. Descendants of this class
+            are referred to as Data Providers.
+            </summary>
+            <remarks>
+            To create an application specific Data Provider derive a new class from
+            MbusDataTableInterface and override the required data access methods.
+            </remarks>
+            <seealso href="group__dataprovider.htm" target= "_self">Data Provider</seealso>
+            <seealso cref="T:FieldTalk.Modbus.Slave.MbusTcpSlaveProtocol"/>
+            <seealso cref="T:FieldTalk.Modbus.Slave.MbusRtuSlaveProtocol"/>
+            <seealso cref="T:FieldTalk.Modbus.Slave.MbusAsciiSlaveProtocol"/>
+        </member>
+        <member name="M:FieldTalk.Modbus.Slave.MbusDataTableInterface.#ctor">
+            <exclude/>
+        </member>
+        <member name="M:FieldTalk.Modbus.Slave.MbusDataTableInterface.readHoldingRegistersTable(System.Int32,System.Int16[])">
+             <summary> Override this method to implement a Data Provider
+             function to read Holding Registers. </summary>
+             <remarks>
+             When a slave receives a poll request for the 4:00000 data
+             table it calls this method to retrieve the data.
+            
+             <para><b>Required:</b>
+             Yes
+             </para>
+             <para><b>Default Implementation:</b>
+             Returns false which indicates to Server Engine that this address range is
+             unsupported.
+             </para>
+             </remarks>
+            
+             <example> A simple implementation which holds the application data in an array
+             of Int16 called localRegisters could be:
+             <code language="C#"> <![CDATA[
+             protected override int readHoldingRegistersTable(Int32 startRef, Int16[] regArr)
+             {
+                 // Adjust Modbus reference counting from 1-based to 0-based
+                 startRef--;
+                 // Validate range
+                 if (startRef + regArr.Length > localRegisters.Length)
+                     return false;
+                 // Copy registers from local data array to Modbus
+                 for (int i = 0; i < regArr.Length; i++)
+                     regArr[i] = localRegisters[startRef + i];
+                 return true;
+             }
+             ]]> </code>
+             <code language="VB.net"> <![CDATA[
+                Protected Overrides Function readHoldingRegistersTable(ByVal startRef As Int32, ByVal regArr() As Int16) As Integer
+                    Dim i As Integer
+            
+                    ' Adjust Modbus reference counting from 1-based to 0-based
+                    startRef = startRef - 1
+                    ' Validate range
+                    If startRef + regArr.Length > localRegisters.Length Then
+                        Return False
+                    End If
+                    ' Copy registers from local data array to Modbus
+                    For i = 0 To regArr.Length - 1
+                        regArr(i) = localRegisters(startRef + i)
+                    Next
+                    Return True
+                End Function
+             ]]> </code>
+             </example>
+            
+             <param name="startRef"> Start register (Range: 1 - 65536) </param>
+             <param name="regArr"> Buffer which has to be filled with the reply data (Length: 0 - 125) </param>
+            
+             <returns> true indicates a successful access and that valid
+             reply data is contained in regArr. The Server Engine will
+             reply the data passed in regArr to the master.
+             <para> false indicates that access has been denied or is out of
+             range. The Server Engine will reply to the master with an
+             exception reply message </para> </returns>
+        </member>
+        <member name="M:FieldTalk.Modbus.Slave.MbusDataTableInterface.writeHoldingRegistersTable(System.Int32,System.Int16[])">
+             <summary> Override this method to implement a Data Provider
+             function to write Holding Registers. </summary>
+             <remarks>
+             When a slave receives a write request for the 4:00000 data table it
+             calls this method to pass the data to the application.
+            
+             <para><b>Required:</b>
+             Yes
+             </para>
+             <para><b>Default Implementation:</b>
+             Returns false which indicates to Server Engine that this address range is
+             unsupported.
+             </para>
+             </remarks>
+            
+             <example> A simple implementation which holds the application data in an array
+             of Int16 called localRegisters could be:
+             <code language="C#"> <![CDATA[
+             protected override int writeHoldingRegistersTable(Int32 startRef, Int16[] regArr)
+             {
+                 // Adjust Modbus reference counting from 1-based to 0-based
+                 startRef--;
+                 // Validate range
+                 if (startRef + regArr.Length > localRegisters.Length)
+                     return false;
+                 // Copy registers from Modbus to local data block
+                 for (int i = 0; i < regArr.Length; i++)
+                     localRegisters[startRef + i] = regArr[i];
+                 return true;
+             }
+             ]]> </code>
+             <code language="VB.net"> <![CDATA[
+             Protected Overrides Function writeHoldingRegistersTable(ByVal startRef As Int32, ByVal regArr() As Int16) As Integer
+                 Dim i As Integer
+                 ' Adjust Modbus reference counting from 1-based to 0-based
+                 startRef = startRef - 1
+                 ' Validate range
+                 If startRef + regArr.Length > localRegisters.Length Then
+                     Return False
+                 End If
+                 ' Copy registers from Modbus to local data block
+                 For i = 0 To regArr.Length - 1
+                     localRegisters(startRef + i) = regArr(i)
+                 Next
+                 Return True
+             End Function
+             ]]> </code>
+             </example>
+            
+             <param name="startRef"> Start register (Range: 1 - 65536) </param>
+             <param name="regArr"> Buffer which contains the received data (Length: 0 - 125) </param>
+            
+             <returns> true indicates a successful access. The Server Engine will send a
+             positive reply to the master.
+             <para> false indicates that access has been denied or is out of
+             range. The Server Engine will reply to the master with an
+             exception reply message </para> 
+             </returns>
+        </member>
+        <member name="M:FieldTalk.Modbus.Slave.MbusDataTableInterface.readEnronRegistersTable(System.Int32,System.Int32[])">
+             <summary> Implement this function only if your slave device
+             has to process register ranges as Daniel/ENRON 32-bit
+             registers.</summary>
+             <remarks>
+             If a register range is processed as Daniel/ENRON register then
+             this range is not available as normal Holding Register range.
+             
+             <para><b>Required:</b>
+             Yes
+             </para>
+             <para><b>Default Implementation:</b>
+             Returns 0 which indicates that the requested register range
+             is processed as standard Modbus registers by a subsequent
+             call to readHoldingRegistersTable().
+             </para>
+             <b>Note:</b> Daniel/ENRON is a prorietary 32-bit format which uses a
+             non-standard Modbus frame and not understood by most master devices.
+             </remarks>
+             
+             <param name="startRef"> Start register (Range: 1 - 65536) </param>
+             <param name="regArr"> Buffer which has to be filled with the reply data (Length: 0 - 62) </param>
+            
+             <returns> true indicates a successful access and that valid reply data is
+             contained in regArr. The Server Engine will reply the data passed in
+             regArr to the master using the Daniel/ENRON frame format.
+             <para> false indicates that the requested range is not to be
+             processed using the Daniel/ENRON frame format.
+             A subsequent call to readHoldingRegistersTable() will be made to
+             process the range in standard Modbus frame format. </para> </returns>
+        </member>
+        <member name="M:FieldTalk.Modbus.Slave.MbusDataTableInterface.writeEnronRegistersTable(System.Int32,System.Int32[])">
+             <summary> Implement this function only if your slave device has to process
+             register ranges as Daniel/ENRON 32-bit registers. </summary>
+             <remarks>
+             If a register range is processed as Daniel/ENRON register then
+             this range is not available as normal Holding Register range.
+            
+             <para><b>Required:</b>
+             No
+             </para>
+             <para><b>Default Implementation:</b>
+             Returns 0 which indicates that the requested register
+             range is processed as standard Modbus registers by a subsequent
+             call to writeHoldingRegistersTable().
+             </para>
+             <b>Note:</b> Daniel/ENRON is a prorietary 32-bit format which uses a
+             non-standard Modbus frame and not understood by most master devices.
+             </remarks>
+             
+             <param name="startRef"> Start register (Range: 1 - 65536) </param>
+             <param name="regArr"> Buffer which contains the received data (Length: 0 - 62) </param>
+            
+             <returns> true indicates a successful access. The Server Engine will send a
+             positive reply to the master.
+             <para> false indicates that access has been denied or is out of
+             range. The Server Engine will reply to the master with an
+             exception reply message </para> 
+             </returns>
+        </member>
+        <member name="M:FieldTalk.Modbus.Slave.MbusDataTableInterface.readInputRegistersTable(System.Int32,System.Int16[])">
+             <summary> Override this method to implement a Data Provider
+             function to read Input Registers. </summary>
+             <remarks>
+             When a slave receives a poll request for the 3:00000 data table it
+             calls this method to retrieve the data.
+            
+             <para><b>Required:</b>
+             Yes
+             </para>
+             <para><b>Default Implementation:</b>
+             Returns false which indicates to Server Engine that this address range is
+             unsupported.
+             </para>
+             </remarks>
+            
+             <example> A simple and very common implementation is to map the Input Registers
+             to the same address space than the Holding Registers table:
+             <code language="C#">
+             protected override int readInputRegistersTable(int startRef, short[] regArr)
+             {
+                return readHoldingRegistersTable(startRef, regArr);
+             }
+             </code>
+             <code language="VB.net">
+             Protected Overrides Function readInputRegistersTable(ByVal startRef As Integer, ByVal regArr() As Short) As Integer
+                 Return readHoldingRegistersTable(startRef, regArr)
+             End Function
+             </code>
+             </example>
+            
+             <param name="startRef"> Start register (Range: 1 - 65536) </param>
+             <param name="regArr"> Buffer which has to be filled with the reply data (Length: 0 - 125) </param>
+            
+             <returns> true indicates a successful access and that valid
+             reply data is contained in regArr. The Server Engine will
+             reply the data passed in regArr to the master.
+             <para> false indicates that access has been denied or is out of
+             range. The Server Engine will reply to the master with an
+             exception reply message </para> </returns>
+        </member>
+        <member name="M:FieldTalk.Modbus.Slave.MbusDataTableInterface.readCoilsTable(System.Int32,System.Boolean[])">
+             <summary> Override this method to implement a Data Provider
+             function to read Coils. </summary>
+             <remarks>
+             When a slave receives a poll request for the 0:00000 data table it
+             calls this method to retrieve the data.
+            
+             <para><b>Required:</b>
+             No
+             </para>
+             <para><b>Default Implementation:</b>
+             Returns false which indicates to Server Engine that this address range is
+             unsupported.
+             </para>
+             </remarks>
+            
+             <example>  A simple implementation which holds the boolean application data in
+             an array of bool called bitData could be:
+             <code language="C#"> <![CDATA[
+             protected override int readCoilsTable(Int32 startRef, bool[] bitArr)
+             {
+                 // Adjust Modbus reference counting from 1-based to 0-based
+                 startRef--;
+                 // Validate range
+                 if (startRef + bitArr.Length > localCoils.Length)
+                     return false;
+                 // Copy registers from local data array to Modbus
+                 for (int i = 0; i < bitArr.Length; i++)
+                     bitArr[i] = localCoils[startRef + i];
+                 return true;
+             }
+             ]]> </code>
+             <code language="VB.net"> <![CDATA[
+             Protected Overrides Function readCoilsTable(ByVal startRef As Int32, ByVal bitArr() As Boolean) As Integer
+                 ' Adjust Modbus reference counting from 1-based to 0-based
+                 startRef -= 1
+                 ' Validate range
+                 If startRef + bitArr.Length > localCoils.Length Then
+                  Return False
+                 End If
+                 ' Copy registers from local data array to Modbus
+                 For i As Integer = 0 To bitArr.Length - 1
+                  bitArr(i) = localCoils(startRef + i)
+                 Next i
+                 Return True
+             End Function
+             ]]> </code>
+             </example>
+            
+             <param name="startRef"> Start register (Range: 1 - 65536) </param>
+             <param name="bitArr"> Buffer which has to be filled with the reply
+             data (Length: 0 - 2000). Each char represents one coil! </param>
+            
+             <returns> true indicates a successful access and that valid
+             reply data is contained in regArr. The Server Engine will
+             reply the data passed in regArr to the master.
+             <para> false indicates that access has been denied or is out of
+             range. The Server Engine will reply to the master with an
+             exception reply message </para> </returns>
+        </member>
+        <member name="M:FieldTalk.Modbus.Slave.MbusDataTableInterface.writeCoilsTable(System.Int32,System.Boolean[])">
+             <summary> Override this method to implement a Data Provider
+             function to write Coils. </summary>
+             <remarks>
+             When a slave receives a write request for the 0:00000 data table it
+             calls this method to pass the data to the application.
+            
+             <para><b>Required:</b>
+             No
+             </para>
+             <para><b>Default Implementation:</b>
+             Returns false which indicates to Server Engine that this address range is
+             unsupported.
+             </para>
+             </remarks>
+            
+             <example>
+             A simple implementation which holds the boolean application data in
+             an array of bool call bitData could be:
+             <code language="C#"> <![CDATA[
+             protected override int writeCoilsTable(Int32 startRef, bool[] bitArr)
+             {
+                 // Adjust Modbus reference counting from 1-based to 0-based
+                 startRef--;
+                 // Validate range
+                 if (startRef + bitArr.Length > localCoils.Length)
+                     return false;
+                 // Copy registers from Modbus to local data block
+                 for (int i = 0; i < bitArr.Length; i++)
+                     localCoils[startRef + i] = bitArr[i];
+                 return true;
+             }
+             ]]> </code>
+             <code language="VB.net"> <![CDATA[
+             Protected Overrides Function writeCoilsTable(ByVal startRef As Int32, ByVal bitArr() As Boolean) As Integer
+                 ' Adjust Modbus reference counting from 1-based to 0-based
+                 startRef -= 1
+                 ' Validate range
+                 If startRef + bitArr.Length > localCoils.Length Then
+                     Return False
+                 End If
+                 ' Copy registers from Modbus to local data block
+                 For i As Integer = 0 To bitArr.Length - 1
+                     localCoils(startRef + i) = bitArr(i)
+                 Next i
+                 Return True
+             End Function
+             ]]> </code>
+             </example>
+            
+             <param name="startRef"> Start register (Range: 1 - 65536) </param>
+             <param name="bitArr"> Buffer which contains the received data
+             (Length: 0 - 2000). Each char repesents one coil! </param>
+            
+             <returns> true indicates a successful access. The Server Engine will send a
+             positive reply to the master.
+             <para> false indicates that access has been denied or is out of
+             range. The Server Engine will reply to the master with an
+             exception reply message </para> 
+             </returns>
+        </member>
+        <member name="M:FieldTalk.Modbus.Slave.MbusDataTableInterface.readInputDiscretesTable(System.Int32,System.Boolean[])">
+             <summary> Override this method to implement a Data Provider
+             function to read Coils. </summary>
+             <remarks>
+             When a slave receives a poll request for the 0:00000 data table it
+             calls this method to retrieve the data.
+            
+             <para><b>Required:</b>
+             No
+             </para>
+             <para><b>Default Implementation:</b>
+             Returns false which indicates to Server Engine that this address range is
+             unsupported.
+             </para>
+             </remarks>
+            
+             <example>
+             A simple and very common implementation is to map the Input Discretes
+             to the same address space than the Coils table:
+             <code language="C#">
+             protected override int readInputDiscretesTable(int startRef, bool[] bitArr)
+             {
+                return readCoilsTable(startRef, bitArr);
+             }
+             </code>
+             <code language="VB.net">
+             Protected Overrides Function readInputDiscretesTable(ByVal startRef As Integer, ByVal bitArr() As Boolean) As Integer
+                 Return readCoilsTable(startRef, bitArr)
+             End Function
+             </code>
+             </example>
+            
+             <param name="startRef"> Start register (Range: 1 - 65536) </param>
+             <param name="bitArr"> Buffer which has to be filled with the reply
+             data (Length: 0 - 2000). Each char repesents one discrete! </param>
+            
+             <returns> true indicates a successful access and that valid
+             reply data is contained in regArr. The Server Engine will
+             reply the data passed in regArr to the master.
+             <para> false indicates that access has been denied or is out of
+             range. The Server Engine will reply to the master with an
+             exception reply message </para> </returns>
+        </member>
+        <member name="M:FieldTalk.Modbus.Slave.MbusDataTableInterface.readFileRecord(System.Int32,System.Int32,System.Int32,System.Int16[])">
+             <summary> Override this method to implement a Data Provider function to read
+             File Records which is Modbus function code 20 (14 hex).</summary>
+             <remarks>
+             When a slave receives a poll request for function code 20 it
+             calls this method to retrieve the data.
+            
+             <para><b>Required:</b>
+             No
+             </para>
+             <para><b>Default Implementation:</b>
+             Returns false which indicates to Server Engine that this address range is
+             unsupported.
+             </para>
+             </remarks>
+             
+             <param name="refType"> Reference type (typically this is 6) </param>
+             <param name="fileNo"> File number (typically 0, 1, 3 or 4) </param>
+             <param name="startRef"> Record Number (equivalent to the start register) </param>
+             <param name="regArr"> Buffer which has to be filled with the reply data (Length: 0 - 125) </param>
+             
+             <returns> true indicates a successful access and that valid
+             reply data is contained in regArr. The Server Engine will
+             reply the data passed in regArr to the master.
+             <para> false indicates that access has been denied or is out of
+             range. The Server Engine will reply to the master with an
+             exception reply message </para> 
+             </returns>
+        </member>
+        <member name="M:FieldTalk.Modbus.Slave.MbusDataTableInterface.writeFileRecord(System.Int32,System.Int32,System.Int32,System.Int16[])">
+             <summary>Override this method to implement a Data Provider function to write
+             File Records which is Modbus function code 21 (15 hex).</summary>
+             <remarks>
+             When a slave receives a write request for function code 21 it
+             calls this method to pass the data to the application.
+             
+             <para><b>Required:</b>
+             No
+             </para>
+             <para><b>Default Implementation:</b>
+             Returns false which indicates to Server Engine that this address range is
+             unsupported.
+             </para>
+             </remarks>
+            
+             <param name="refType"> Reference type (typically this is 6) </param>
+             <param name="fileNo"> File number (typically 0, 1, 3 or 4) </param>
+             <param name="startRef"> Record Number (equivalent to the start register) </param>
+             <param name="regArr"> Buffer which contains the received data </param>
+             
+             <returns> true indicates a successful access. The Server Engine will send a
+             positive reply to the master.
+             <para> false indicates that access has been denied or is out of
+             range. The Server Engine will reply to the master with an
+             exception reply message </para> 
+             </returns>
+        </member>
+        <member name="M:FieldTalk.Modbus.Slave.MbusDataTableInterface.readExceptionStatus">
+            <summary> Override this method to implement a function with
+            reports the eight exception status coils (bits) within the
+            slave device. </summary>
+            <remarks>
+            <para>
+            The exception status coils are device specific and usually used to
+            report a device' principal status or a device' major failure codes as a
+            8-bit word.
+            </para>
+            <para><b>Required:</b>
+            No
+            </para>
+            <para><b>Default Implementation:</b>
+            Returns 0 as exception status byte.
+            </para>
+            </remarks>
+            <returns> Exception status byte </returns>
+        </member>
+        <member name="M:FieldTalk.Modbus.Slave.MbusDataTableInterface.reportSlaveId">
+            <summary>Override this method to implement a function which 
+            reports the Slave ID.</summary>
+            <remarks>
+            This is called when function code 17 (11 hex) Report Slave ID
+            is sent by a master. 
+            
+            The Slave ID is a device-specific ASCII string.
+            
+            <para><b>Required:</b>
+            No
+            </para>
+            <para><b>Default Implementation:</b>
+            Returns null which sends a slave failure exception reply
+            </para>
+            <para>
+            <b>Note:</b> The Slave ID is not to be mistaken for the Modbus Slave Address.
+            The Slave ID is a string vs the Slave Address is a numeric value and
+            the latter is used by a master device to address a specific device.
+            </para>
+            </remarks>
+            
+            <returns> A string with the slave ID </returns>
+        </member>
+        <member name="M:FieldTalk.Modbus.Slave.MbusDataTableInterface.reportRunIndicatorStatus">
+             <summary>Override this method to implement a function which reports the Run Indicator
+             of a device.</summary>
+             <remarks>
+             This is called when function code 17 (11 hex) Report Slave ID
+             is sent by a master.
+            
+             <para><b>Required:</b>
+             No
+             </para>
+             <para><b>Default Implementation:</b>
+             Returns false (OFF) as run indicator status
+             </para>
+             </remarks>
+             <returns> Run Indicator status, true for ON, false for OFF </returns>
+        </member>
+        <member name="M:FieldTalk.Modbus.Slave.MbusDataTableInterface.readDeviceIdentification(System.Int32)">
+             <summary> Override this method to implement Read Device 
+             Identification objects to support Modbus function 43 (hex 2B) 
+             subfunction 14 (hex 0E).</summary>
+             <remarks>
+             This function allows a master to retrieve various objects with
+             meta information about a slave device. The objects are returned as
+             ASCII string.
+            
+             <table>
+               <tr><td><b>Object Id</b></td><td><b>Object Name / Description</b></td></tr>
+               <tr><td>0x00</td><td>VendorName</td></tr>
+               <tr><td>0x01</td><td>ProductCode</td></tr>
+               <tr><td>0x02</td><td>MajorMinorRevision</td></tr>
+               <tr><td>0x03</td><td>VendorUrl</td></tr>
+               <tr><td>0x04</td><td>ProductName</td></tr>
+               <tr><td>0x05</td><td>ModelName</td></tr>
+               <tr><td>0x06</td><td>UserApplicationName</td></tr>
+               <tr><td>0x07 - 0x7F</td><td><i>Reserved</i></td></tr>
+               <tr><td>0x80 - 0xFF</td><td>Vendor specific private objects</td></tr>
+             </table>
+            
+             <para><b>Required:</b>
+             No
+             </para>
+             <para><b>Default Implementation:</b>
+             Returns null which causes an unsupported ID exception reply
+             </para>
+             </remarks>
+             
+             <param name="objId">objId ID number (0x00 - 0xFF)</param>
+             
+             <returns> Requested Device ID string object </returns>
+        </member>
+        <member name="M:FieldTalk.Modbus.Slave.MbusDataTableInterface.timeOutHandler">
+             <summary> Override this method to implement a function to
+             handle master poll time-outs. </summary>
+             <remarks>
+             A master should poll a slave cyclically. If no master is polling
+             within the time-out period this method is called. A slave can take
+             certain actions if the master has lost connection, e.g. go into a
+             fail-safe state.
+            
+             <para><b>Required:</b>
+             No
+             </para>
+             <para><b>Default Implementation:</b>
+             Empty
+             </para>
+             </remarks>
+        </member>
+        <member name="T:FieldTalk.Modbus.Slave.MbusSlaveServer">
+            <summary> Base class which implements the Modbus server engine. </summary>
+            <remarks>
+            This class realises the server engine. The server engines processes
+            Modbus messages, parses the function codes and upon receipt of a valid
+            master query it calls Data Provider methods to exchange data with the
+            user application.
+            <para>
+            For a more detailed description which Modbus data and control
+            functions have been implemented in the server engine see section
+            <a href="group__mbusslave.htm">Server Functions common to all Protocol Flavours</a>.
+            </para>
+            </remarks>
+            <threadsafety static="true" instance="false"/>
+            <seealso href="group__mbusslave.htm" target= "_self">Server Functions common to all Protocol Flavours</seealso>
+            <seealso cref="T:FieldTalk.Modbus.Slave.MbusDataTableInterface"/>
+        </member>
+        <member name="F:FieldTalk.Modbus.Slave.MbusSlaveServer.mbusHdl">
+            <exclude/>
+        </member>
+        <member name="M:FieldTalk.Modbus.Slave.MbusSlaveServer.#cctor">
+            <exclude/>
+        </member>
+        <member name="P:FieldTalk.Modbus.Slave.MbusSlaveServer.timeout">
+            <summary> Time-out port property </summary>
+            <remarks>
+            Configures operation or socket time-out.
+            <para> The time-out value is indicative only and not guaranteed to be
+            maintained. How precise it is followed depends on the operating system
+            used, it's scheduling priority and it's system timer resolution.</para>
+            <note> This property must be set before starting
+            the server in order to come into effect. </note>
+            </remarks>
+            <value> Timeout value in ms (Range: 1 - 100000) </value>
+        </member>
+        <member name="M:FieldTalk.Modbus.Slave.MbusSlaveServer.Dispose">
+            <summary> Implement IDisposable. </summary>
+            <remarks>
+            Shuts down server, closes any associated communication resources
+            (serial ports or sockets) and releases any resources.
+            </remarks>
+        </member>
+        <member name="M:FieldTalk.Modbus.Slave.MbusSlaveServer.Finalize">
+            <summary> Destructor. </summary>
+            <remarks>
+            Shuts down server, closes any associated communication resources
+            (serial ports or sockets) and releases any resources.
+            </remarks>
+        </member>
+        <member name="M:FieldTalk.Modbus.Slave.MbusSlaveServer.addDataTable(System.Int32,FieldTalk.Modbus.Slave.MbusDataTableInterface)">
+             <summary> Associates a protocol object with a Data Provider and a
+             Modbus slave ID. </summary>
+            
+             <param name="slaveAddr"> Modbus slave address for server to listen
+             on (-1 - 255). 0 is regarded as a valid value for a
+             MODBUS/TCP server address. A value of -1 means the server
+             disregards the slave address and listens to all slave
+             addresses. 0 or -1 is only valid for MODBUS/TCP! </param>
+             <param name="dataTable"> Reference to a Modbus data table. Must
+             be a Data Provider object derived from the
+             <see cref="T:FieldTalk.Modbus.Slave.MbusDataTableInterface"/> class. The Data Provider is the
+             interface between your application data and the Modbus  network. </param>
+             <returns> BusProtocolErrors.FTALK_SUCCESS on success or error code.
+             See <see cref="T:FieldTalk.Modbus.Slave.BusProtocolErrors"/> for possible error codes. </returns>
+        </member>
+        <member name="M:FieldTalk.Modbus.Slave.MbusSlaveServer.serverLoop">
+             <summary> Modbus slave server loop </summary>
+             <remarks>
+             This server loop must be called continuously. It must not be
+             blocked. The server has to be started before calling the serverLoop()
+             method.
+            
+             In most cases the server loop is executed in an infinite loop in
+             its own thread:
+             <code language="C#">
+             while (notTerminated)
+             {
+                 result = mbusProtocol.serverLoop();
+             }
+             </code>
+             <code language="VB.net">
+             Do While notTerminated
+                 result = mbusProtocol.serverLoop()
+             Loop
+             </code>
+             </remarks>
+             <returns> BusProtocolErrors.FTALK_SUCCESS on success or error code.
+             See <see cref="T:FieldTalk.Modbus.Slave.BusProtocolErrors"/> for possible error codes. </returns>
+        </member>
+        <member name="M:FieldTalk.Modbus.Slave.MbusSlaveServer.isStarted">
+             <summary> Returns whether server has been started up. </summary>
+            
+             <returns> true = started </returns>
+             <returns> false = shutdown </returns>
+        </member>
+        <member name="M:FieldTalk.Modbus.Slave.MbusSlaveServer.shutdownServer">
+            <summary> Shuts down the Modbus Server. </summary>
+            <remarks>
+            This function also closes any associated serial ports or sockets.
+            </remarks>
+        </member>
+        <member name="M:FieldTalk.Modbus.Slave.MbusSlaveServer.getConnectionStatus">
+            <summary> Checks if a Modbus master is polling periodically. </summary>
+            <remarks>
+            <note> The master transmit time-out value must be set > 0 in order for this
+            function to work. </note>
+            </remarks>
+            <returns> true = A master is polling at a frequency higher than the
+            master transmit time-out value </returns>
+            <returns> false = No master is polling within the time-out period </returns>
+        </member>
+        <member name="M:FieldTalk.Modbus.Slave.MbusSlaveServer.setTimeout(System.Int32)">
+             <summary> Configures master transmit time-out supervision. </summary>
+             <remarks>
+             Configures master transmit time-out supervision. The slave can monitor
+             whether a master is actually transmitting characters or not.
+             This function sets the transmit time-out to the specified value.
+             A value of 0 disables the time-out, which stops time-out
+             notifications being sent to the Data Provider.
+            
+             <note> The time-out value is a minimum value only and the actual
+             time may be longer.
+             How precise it is followed depends on the operating system
+             used, its scheduling priority and its system timer resolution. </note>
+            
+             <note> The time-out does not check whether a master is sending valid
+             frames. The transmission of characters is sufficient to avoid the time-out.</note>
+             </remarks>
+             <param name="timeOut"> Timeout value in ms (Range: 1 - 100000), 0 disables time-out </param>
+             <returns> BusProtocolErrors.FTALK_SUCCESS on success or error code.
+             See <see cref="T:FieldTalk.Modbus.Slave.BusProtocolErrors"/> for possible error codes. </returns>
+        </member>
+        <member name="M:FieldTalk.Modbus.Slave.MbusSlaveServer.getTimeout">
+            <summary> Returns the currently set master time-out supervision value. </summary>
+            <remarks>
+            <note> The time-out value is a minimum value only and the actual
+            time may be longer.
+            How precise it is followed depends on the operating system
+            used, its scheduling priority and its system timer resolution. </note>
+            </remarks>
+            <returns> Timeout value in ms </returns>
+        </member>
+        <member name="M:FieldTalk.Modbus.Slave.MbusSlaveServer.getTotalCounter">
+            <summary> Returns how often a message transfer has been executed. </summary>
+            <returns> Counter value </returns>
+        </member>
+        <member name="M:FieldTalk.Modbus.Slave.MbusSlaveServer.resetTotalCounter">
+            <summary> Resets total message transfer counter. </summary>
+        </member>
+        <member name="M:FieldTalk.Modbus.Slave.MbusSlaveServer.getSuccessCounter">
+            <summary> Returns how often a message transfer was successful. </summary>
+            <returns> Counter value </returns>
+        </member>
+        <member name="M:FieldTalk.Modbus.Slave.MbusSlaveServer.resetSuccessCounter">
+            <summary> Resets successful message transfer counter. </summary>
+        </member>
+        <member name="M:FieldTalk.Modbus.Slave.MbusSlaveServer.getPackageVersion">
+            <summary> Returns the library version number. </summary>
+            <returns> Version string </returns>
+        </member>
+        <member name="T:FieldTalk.Modbus.Slave.MbusSerialSlaveProtocol">
+            <summary> This base class implements common functionality for both serial
+            Modbus protocols. </summary>
+            <remarks>
+            These methods apply to RTU and ASCII protocol flavours via
+            inheritance.
+            </remarks>
+            <threadsafety static="true" instance="false"/>
+            <seealso href="group__mbusslave.htm" target= "_self">Server Functions common to all Protocol Flavours</seealso>
+            <seealso href="group__mbusslaveserial.htm">Serial Protocols</seealso>
+            <seealso cref="T:FieldTalk.Modbus.Slave.MbusDataTableInterface"/>
+        </member>
+        <member name="F:FieldTalk.Modbus.Slave.MbusSerialSlaveProtocol.SER_DATABITS_7">
+            <summary> 7 data bits </summary>
+        </member>
+        <member name="F:FieldTalk.Modbus.Slave.MbusSerialSlaveProtocol.SER_DATABITS_8">
+            <summary> 8 data bits </summary>
+        </member>
+        <member name="F:FieldTalk.Modbus.Slave.MbusSerialSlaveProtocol.SER_STOPBITS_1">
+            <summary> 1 stop bit </summary>
+        </member>
+        <member name="F:FieldTalk.Modbus.Slave.MbusSerialSlaveProtocol.SER_STOPBITS_2">
+            <summary> 2 stop bits </summary>
+        </member>
+        <member name="F:FieldTalk.Modbus.Slave.MbusSerialSlaveProtocol.SER_PARITY_NONE">
+            <summary> No parity </summary>
+        </member>
+        <member name="F:FieldTalk.Modbus.Slave.MbusSerialSlaveProtocol.SER_PARITY_ODD">
+            <summary> Odd parity </summary>
+        </member>
+        <member name="F:FieldTalk.Modbus.Slave.MbusSerialSlaveProtocol.SER_PARITY_EVEN">
+            <summary> Even parity </summary>
+        </member>
+        <member name="P:FieldTalk.Modbus.Slave.MbusSerialSlaveProtocol.portName">
+            <summary> Serial port identifier property </summary>
+            <remarks>
+            <note> This property must be set before starting
+            the server in order to come into effect. </note>
+            </remarks>
+            <value> Serial port identifier (eg "COM1") </value>
+        </member>
+        <member name="P:FieldTalk.Modbus.Slave.MbusSerialSlaveProtocol.baudRate">
+            <summary> Baud rate property in bps  </summary>
+            <remarks>
+            <note> This property must be set before starting
+            the server in order to come into effect. </note>
+            </remarks>
+            <value> Typically 1200 - 115200, maximum value depends on UART hardware </value>
+        </member>
+        <member name="P:FieldTalk.Modbus.Slave.MbusSerialSlaveProtocol.dataBits">
+            <summary> Data bits property </summary>
+            <remarks>
+            <note> This property must be set before starting
+            the server in order to come into effect. </note>
+            </remarks>
+            <value> SER_DATABITS_7 as 7 data bits (ASCII protocol only),
+            SER_DATABITS_8 as data bits </value>
+        </member>
+        <member name="P:FieldTalk.Modbus.Slave.MbusSerialSlaveProtocol.stopBits">
+            <summary> Stop bits property </summary>
+            <remarks>
+            <note> The Modbus standard requires two stop bits if no parity is chosen.
+            This library is not enforcing this but it is a recommended configuration.</note>
+            <note> This property must be set before starting
+            the server in order to come into effect. </note>
+            </remarks>
+            <value> SER_STOPBITS_1 as 1 stop bit, SER_STOPBITS_2 as 2 stop bits </value>
+        </member>
+        <member name="P:FieldTalk.Modbus.Slave.MbusSerialSlaveProtocol.parity">
+            <summary> Parity property </summary>
+            <remarks>
+            <note> This property must be set before starting
+            the server in order to come into effect. </note>
+            </remarks>
+            <value> SER_PARITY_NONE as no parity, SER_PARITY_ODD as odd parity,
+            SER_PARITY_EVEN as even parity </value>
+        </member>
+        <member name="M:FieldTalk.Modbus.Slave.MbusSerialSlaveProtocol.#ctor">
+            <summary> Creates new instance </summary>
+            <exception cref="T:System.OutOfMemoryException"> Creation of class failed </exception>
+        </member>
+        <member name="M:FieldTalk.Modbus.Slave.MbusSerialSlaveProtocol.startupServer">
+            <summary> Opens a serial Modbus protocol and the associated serial
+            port with the port parameters configured via properties </summary>
+            <remarks>
+            This function opens the serial port. After a port has been
+            opened, data and control functions can be used.
+            </remarks>
+            <returns> BusProtocolErrors.FTALK_SUCCESS on success or error code.
+            See <see cref="T:FieldTalk.Modbus.Slave.BusProtocolErrors"/> for possible error codes. </returns>
+        </member>
+        <member name="M:FieldTalk.Modbus.Slave.MbusSerialSlaveProtocol.startupServer(System.String,System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary> Opens a serial Modbus protocol and the associated serial port
+            with the port parameters configured via properties </summary>
+            <remarks>
+            This function opens the serial port with a specific port settings.
+            After a port has been opened, data and control functions can be used.
+            <note> The Modbus standard requires two stop bits if no parity is chosen.
+            This library is not enforcing this but it is a recommended configuration.</note>
+            </remarks>
+            <param name="portName"> Serial port identifier (eg "COM1") </param>
+            <param name="baudRate"> The port baud rate in bps (1200 - 115200,
+            higher on some platforms) </param>
+            <param name="dataBits"> SER_DATABITS_7: 7 data bits
+            (ASCII protocol only), SER_DATABITS_8: 8 data bits </param>
+            <param name="stopBits"> SER_STOPBITS_1: 1 stop bit,
+            SER_STOPBITS_2: 2 stop bits </param>
+            <param name="parity"> SER_PARITY_NONE: no parity,
+            SER_PARITY_ODD: odd parity, SER_PARITY_EVEN: even parity </param>
+            <returns> BusProtocolErrors.FTALK_SUCCESS on success or error code.
+            See <see cref="T:FieldTalk.Modbus.Slave.BusProtocolErrors"/> for possible error codes. </returns>
+        </member>
+        <member name="M:FieldTalk.Modbus.Slave.MbusSerialSlaveProtocol.enableRs485Mode(System.Int32)">
+             <summary> Enables RS485 mode. </summary>
+             <remarks>
+             In RS485 mode the RTS signal can be used to enable and disable the
+             transmitter of a RS232/RS485 converter. The RTS signal is asserted
+             before sending data. It is cleared after the transmit buffer has been
+             emptied and in addition the specified delay time has elapsed. The delay
+             time is necessary because even the transmit buffer is already empty,
+             the UART's FIFO will still contain unsent characters.
+             <para>
+             The use of RTS controlled RS232/RS485 converters should be
+             avoided if possible. It is difficult to determine the exact
+             time when to switch off the transmitter with non real-time
+             operating systems like Windows and Linux. If it is switched
+             off to early characters might still sit in the FIFO or the
+             transmit register of the UART and these characters will be
+             lost. Hence the slave will not recognize the message. On the
+             other hand if it is switched off too late then the slave's
+             message is corrupted and the master will not recognize the
+             message.
+             </para>
+            
+             <note> The delay value is indicative only and not guaranteed to be
+             maintained. How precise it is followed depends on the operating system
+             used, it's scheduling priority and it's system timer resolution. </note>
+            
+             <note> This mode must be set before starting
+             the server in order to come into effect. </note>
+            
+             </remarks>
+             <param name="rtsDelay"> Delay time in ms (Range as 0 - 100000) which
+             applies after the transmit buffer is empty. 0 disables this mode. </param>
+             <returns> BusProtocolErrors.FTALK_SUCCESS on success or error code.
+             See <see cref="T:FieldTalk.Modbus.Slave.BusProtocolErrors"/> for possible error codes. </returns>
+        </member>
+        <member name="T:FieldTalk.Modbus.Slave.MbusRtuSlaveProtocol">
+            <summary> This class realises the server side of the Modbus
+            RTU slave protocol. </summary>
+            <remarks>
+            This class provides functions to start-up and to execute the
+            server engine which includes opening and closing of the
+            serial port. Upon receipt of a valid master query the server
+            engine calls Data Provider methods to exchange data with the
+            user application.
+            <para>
+            For a more detailed description which Modbus data and control
+            functions have been implemented in the server engine see section
+            <a href="group__mbusslave.htm">Server Functions common to all Protocol Flavours</a>.
+            </para>
+            <para>
+            It is possible to instantiate multiple instances for establishing
+            multiple connections on different serial ports, however they
+            must be executed in separate threads.
+            </para>
+            </remarks>
+            <threadsafety static="true" instance="false"/>
+            <seealso href="group__mbusslave.htm" target= "_self">Server Functions common to all Protocol Flavours</seealso>
+            <seealso href="group__mbusslaveserial.htm">Serial Protocols</seealso>
+            <seealso cref="T:FieldTalk.Modbus.Slave.MbusDataTableInterface"/>
+        </member>
+        <member name="M:FieldTalk.Modbus.Slave.MbusRtuSlaveProtocol.#ctor">
+            <summary> Instantiates a Modbus RTU protocol server object. </summary>
+            <remarks>
+            The association with a Data Provider is done after construction using the
+            addDataTable method.
+            </remarks>
+            <exception cref="T:System.OutOfMemoryException"> Creation of class failed </exception>
+        </member>
+        <member name="T:FieldTalk.Modbus.Slave.MbusAsciiSlaveProtocol">
+            <summary> This class realises the server side of the Modbus
+            ASCII slave protocol. </summary>
+            <remarks>
+            This class provides functions to start-up and to execute the
+            Modbus ASCII server engine which includes opening and closing
+            of the serial port. Upon receipt of a valid master query the
+            server engine calls Data Provider methods to exchange data
+            with the user application.
+            <para>
+            For a more detailed description which Modbus data and control
+            functions have been implemented in the server engine see section
+            <a href="group__mbusslave.htm">Server Functions common to all Protocol Flavours</a>.
+            </para>
+            <para>
+            It is possible to instantiate multiple instances for establishing
+            multiple connections on different serial ports, however they
+            must be executed in separate threads.
+            </para>
+            </remarks>
+            <threadsafety static="true" instance="false"/>
+            <seealso href="group__mbusslave.htm">Server Functions common to all Protocol Flavours</seealso>
+            <seealso href="group__mbusslaveserial.htm">Serial Protocols</seealso>
+            <seealso cref="T:FieldTalk.Modbus.Slave.MbusDataTableInterface"/>
+        </member>
+        <member name="M:FieldTalk.Modbus.Slave.MbusAsciiSlaveProtocol.#ctor">
+            <summary> Instantiates a Modbus ASCII protocol server object. </summary>
+            <remarks>
+            The association with a Data Provider is done after construction using the
+            <see cref="M:FieldTalk.Modbus.Slave.MbusSlaveServer.addDataTable(System.Int32,FieldTalk.Modbus.Slave.MbusDataTableInterface)"/> method.
+            </remarks>
+            <exception cref="T:System.OutOfMemoryException"> Creation of class failed </exception>
+        </member>
+        <member name="T:FieldTalk.Modbus.Slave.MbusTcpSlaveProtocol">
+            <summary> This class realises the server side of the
+            MODBUS/TCP slave protocol. </summary>
+            <remarks>
+            It provides functions to start-up and to execute the server engine.
+            This server engine can handle multiple master connections and is
+            implemented as a single threaded TCP server.
+            Upon receipt of a valid master query the server engine calls
+            Data Provider methods to exchange data with the user application.
+            </remarks>
+            <para>
+            For a more detailed description which Modbus data and control
+            functions have been implemented in the server engine see section
+            <a href="group__mbusslave.htm">Server Functions common to all Protocol Flavours</a>.
+            </para>
+            <threadsafety static="true" instance="false"/>
+            <seealso href="group__mbusslave.htm" target= "_self">Server Functions common to all Protocol Flavours</seealso>
+            <seealso href="group__mbusslavetcp.htm">TCP/IP Protocols</seealso>
+            <seealso cref="T:FieldTalk.Modbus.Slave.MbusDataTableInterface"/>
+        </member>
+        <member name="P:FieldTalk.Modbus.Slave.MbusTcpSlaveProtocol.hostName">
+            <summary> Host name of server interface </summary>
+            Setting this property is conly required for multihomed
+            servers. If set, the server accepts connections only on the
+            interfaces which match it, instead on any interface. This
+            allows to run different servers on multiple interfaces.
+            <remarks>
+            <note> This parameter must be set before starting
+            the server in order to come into effect. </note>
+            </remarks>
+            <value> String with IP address or host name (eg "127.0.0.1")
+            </value>
+        </member>
+        <member name="P:FieldTalk.Modbus.Slave.MbusTcpSlaveProtocol.port">
+            <summary> TCP port number to be used by the protocol </summary>
+            <remarks>
+            Usually the port number remains unchanged and defaults to
+            502.
+            <note> This parameter must be set before starting
+            the server in order to come into effect. </note>
+            </remarks>
+            <value> TCP Port number of slave device. Default value is 502. </value>
+        </member>
+        <member name="M:FieldTalk.Modbus.Slave.MbusTcpSlaveProtocol.#ctor">
+            <summary> Instantiates a MODBUS/TCP protocol server object. </summary>
+            <remarks>
+            The association with a Data Provider is done after construction using the
+            addDataTable method.
+            </remarks>
+            <exception cref="T:System.OutOfMemoryException"> Creation of class failed </exception>
+        </member>
+        <member name="M:FieldTalk.Modbus.Slave.MbusTcpSlaveProtocol.startupServer">
+            <summary> Puts the Modbus server into operation. </summary>
+            <remarks>
+            This function opens a TCP/IP socket, binds the configured TCP port
+            to the Modbus/TCP protocol and initialises the server engine.
+            <para>
+            If the <see cref="P:FieldTalk.Modbus.Slave.MbusTcpSlaveProtocol.hostName"/> property is set, the server accepts
+            connections only on the interfaces which match it.
+            This allows to run different servers on multiple interfaces
+            (so called multihomed servers).
+            </para>
+            </remarks>
+            <returns> BusProtocolErrors.FTALK_SUCCESS on success or error code.
+            See <see cref="T:FieldTalk.Modbus.Slave.BusProtocolErrors"/> for possible error codes. </returns>
+        </member>
+        <member name="M:FieldTalk.Modbus.Slave.MbusTcpSlaveProtocol.startupServer(System.String)">
+            <summary> Puts the Modbus server into operation. </summary>
+            <remarks>
+            This function opens a TCP/IP socket, binds the configured TCP port
+            to the Modbus/TCP protocol and initialises the server engine.
+            <para>
+            The server accepts connections only on the interfaces which match the
+            supplied hostname or IP address parameter. This method allows
+            to run different servers on multiple interfaces
+            (so called multihomed servers).
+            </para>
+            </remarks>
+            <param name="hostName"> String with IP address for a specific host
+            interface or empty string if connections are accepted on any interface </param>
+            <returns> BusProtocolErrors.FTALK_SUCCESS on success or error code.
+            See <see cref="T:FieldTalk.Modbus.Slave.BusProtocolErrors"/> for possible error codes. </returns>
+        </member>
+        <member name="M:FieldTalk.Modbus.Slave.MbusTcpSlaveProtocol.setPort(System.Int32)">
+            <summary> Sets the TCP port number to be used by the protocol. </summary>
+            <remarks>
+            <note> Usually the port number remains unchanged and defaults to
+            502. In this case no call to this function is necessary. However if
+            the port number has to be different from 502 this function must be
+            called <i>before</i> starting the server with startupServer(). </note>
+            <note> This parameter must be set before starting
+            the server in order to come into effect. </note>
+            </remarks>
+            <param name="portNo"> Port number the server shall listen on </param>
+            <returns> BusProtocolErrors.FTALK_SUCCESS on success or error code.
+            See <see cref="T:FieldTalk.Modbus.Slave.BusProtocolErrors"/> for possible error codes. </returns>
+        </member>
+        <member name="M:FieldTalk.Modbus.Slave.MbusTcpSlaveProtocol.getPort">
+             <summary> Returns the TCP port number used by the protocol. </summary>
+            
+             <returns> Port number used by the protocol </returns>
+        </member>
+        <member name="T:FieldTalk.Modbus.Slave.RegisterConverter">
+            <summary> Helper class to convert common data types to Modbus registers and back. </summary>
+            <threadsafety static="true"/>
+        </member>
+        <member name="M:FieldTalk.Modbus.Slave.RegisterConverter.ToInt16(System.UInt16)">
+            <summary> Cast an unsigned 16-bit value to a 16-bit register value </summary>
+            <param name="ushortVal"> Value to be converted </param>
+            <returns> 16-bit register value </returns>
+        </member>
+        <member name="M:FieldTalk.Modbus.Slave.RegisterConverter.ToInt16(System.Int32)">
+            <summary> Cast a signed 32-bit value to a tuple of 16-bit register values </summary>
+            <param name="intVal"> Value to be converted </param>
+            <returns> Array with 2 16-bit register values </returns>
+        </member>
+        <member name="M:FieldTalk.Modbus.Slave.RegisterConverter.ToInt16(System.UInt32)">
+            <summary> Cast an unsigned 32-bit value to a tuple of 16-bit register values </summary>
+            <param name="intVal"> Value to be converted </param>
+            <returns> Array with 2 16-bit register values </returns>
+        </member>
+        <member name="M:FieldTalk.Modbus.Slave.RegisterConverter.ToInt16(System.Single)">
+            <summary> Cast an 32-bit floating point value to a tuple of 16-bit register values </summary>
+            <param name="floatVal"> Value to be converted </param>
+            <returns> Array with 2 16-bit register values </returns>
+        </member>
+        <member name="M:FieldTalk.Modbus.Slave.RegisterConverter.ToInt16(System.Int32,System.Int16[],System.Int32)">
+            <summary> Copies a signed 32-bit integer value into an array of 16-bit register values </summary>
+            <param name="intVal"> Value to be converted </param>
+            <param name="regArr"> Register array to receive the values </param>
+            <param name="startIndex"> Copy operation will occupy 2 array elements starting at startIndex </param>
+        </member>
+        <member name="M:FieldTalk.Modbus.Slave.RegisterConverter.ToInt16(System.UInt32,System.Int16[],System.Int32)">
+            <summary> Copies an unsigned 32-bit integer value into an array of 16-bit register values </summary>
+            <param name="intVal"> Value to be converted </param>
+            <param name="regArr"> Register array to receive the values </param>
+            <param name="startIndex"> Copy operation will occupy 2 array elements starting at startIndex </param>
+        </member>
+        <member name="M:FieldTalk.Modbus.Slave.RegisterConverter.ToInt16(System.Single,System.Int16[],System.Int32)">
+            <summary> Copies a 32-bit floating point value into an array of 16-bit register values </summary>
+            <param name="floatVal"> Value to be converted </param>
+            <param name="regArr"> Register array to receive the values </param>
+            <param name="startIndex"> Copy operation will occupy 2 array elements starting at startIndex </param>
+        </member>
+        <member name="M:FieldTalk.Modbus.Slave.RegisterConverter.ToUInt16(System.Int16)">
+            <summary> Cast a 16-bit register value to an unsigned 16-bit value </summary>
+            <param name="ushortVal"> Value to be converted </param>
+            <returns> unsigned 16-bit value </returns>
+        </member>
+        <member name="M:FieldTalk.Modbus.Slave.RegisterConverter.ToUInt16(System.Int16[],System.Int32)">
+            <summary> Cast a 16-bit register array element to an unsigned 16-bit value </summary>
+            <param name="regArr"> Register array </param>
+            <param name="startIndex"> Index pointing to the register </param>
+            <returns> unsigned 16-bit value </returns>
+        </member>
+        <member name="M:FieldTalk.Modbus.Slave.RegisterConverter.ToInt32(System.Int16[])">
+            <summary> Cast a tuple of 16-bit registers to a signed 32-bit value </summary>
+            <param name="regArr"> Register array with two elements </param>
+            <returns> signed 32-bit value </returns>
+        </member>
+        <member name="M:FieldTalk.Modbus.Slave.RegisterConverter.ToInt32(System.Int16[],System.Int32)">
+            <summary> Cast a tuple of 16-bit register array elements to a signed 32-bit value </summary>
+            <param name="regArr"> Register array </param>
+            <param name="startIndex"> Index pointing to the register tuple </param>
+            <returns> signed 32-bit value </returns>
+        </member>
+        <member name="M:FieldTalk.Modbus.Slave.RegisterConverter.ToUInt32(System.Int16[])">
+            <summary> Cast a tuple of 16-bit registers to an unsigned 32-bit value </summary>
+            <param name="regArr"> Register array with two elements </param>
+            <returns> unsigned 32-bit value </returns>
+        </member>
+        <member name="M:FieldTalk.Modbus.Slave.RegisterConverter.ToUInt32(System.Int16[],System.Int32)">
+            <summary> Cast a tuple of 16-bit register array elements to an unsigned 32-bit value </summary>
+            <param name="regArr"> Register array </param>
+            <param name="startIndex"> Index pointing to the register tuple </param>
+            <returns> unsigned 32-bit value </returns>
+        </member>
+        <member name="M:FieldTalk.Modbus.Slave.RegisterConverter.ToSingle(System.Int16[])">
+            <summary> Cast a tuple of 16-bit registers to a 32-bit floating point value </summary>
+            <param name="regArr"> Register array with two elements </param>
+            <returns> floating point value </returns>
+        </member>
+        <member name="M:FieldTalk.Modbus.Slave.RegisterConverter.ToSingle(System.Int16[],System.Int32)">
+            <summary> Cast a tuple of 16-bit register array elements to a 32-bit floating point value </summary>
+            <param name="regArr"> Register array </param>
+            <param name="startIndex"> Index pointing to the register tuple </param>
+            <returns> floating point value </returns>
+        </member>
+        <member name="M:FieldTalk.Modbus.Slave.RegisterConverter.ToInt16(System.String,System.Int32,System.Boolean)">
+            <summary>
+            Convert an ASCII string into an array of 16-bit Modbus registers
+            </summary>
+            <param name="s">ASCII string</param>
+            <param name="wordLimit">Max size of allocated registers for
+            string. Max is 125.</param>
+            <param name="fill">Flag if array should be filled to wordLimit with 0 characters</param>
+            <returns>Array containing the register values</returns>
+        </member>
+        <member name="M:FieldTalk.Modbus.Slave.RegisterConverter.ToBits(System.Byte[])">
+            <summary> Unpack all the bits in an array of unsigned bytes
+            to a boolean array containing the bits
+            </summary>
+            <param name="byteArr">Array of bytes, each defining 8
+            bits</param>
+            <returns>Array containing the bit values</returns>
+        </member>
+        <member name="M:FieldTalk.Modbus.Slave.RegisterConverter.ToBits(System.SByte[])">
+            <summary> Unpack all the bits in an array of signed bytes to
+            a boolean array containing the bits
+            </summary>
+            <param name="byteArr">Array of bytes, each defining 8
+            bits</param>
+            <returns>Array containing the bit values</returns>
+        </member>
+        <member name="M:FieldTalk.Modbus.Slave.RegisterConverter.ToBits(System.Byte)">
+            <summary> Unpack all the bits in a byte to a boolean array
+            containing the bits
+            </summary>
+            <param name="byteVal">The byte</param>
+            <returns>Array containing the bit values</returns>
+        </member>
+        <member name="M:FieldTalk.Modbus.Slave.RegisterConverter.ToBits(System.SByte)">
+            <summary>
+            Unpack all the bits in a signed byte to a boolean array
+            containing the bits
+            </summary>
+            <param name="byteVal">The byte</param>
+            <returns>Array containing the bit values</returns>
+        </member>
+        <member name="M:FieldTalk.Modbus.Slave.RegisterConverter.ToBytes(System.Boolean[])">
+            <summary>
+            Pack an array of bits into an array of 8-bit unsigned bytes
+            </summary>
+            <param name="bits">Array with the bits</param>
+            <returns>Array of bytes</returns>
+        </member>
+        <member name="M:FieldTalk.Modbus.Slave.RegisterConverter.ToSBytes(System.Boolean[])">
+            <summary>
+            Pack an array of bits into an array of 8-bit signed bytes
+            </summary>
+            <param name="bits">Array with the bits</param>
+            <returns>Array of bytes</returns>
+        </member>
+        <member name="M:FieldTalk.Modbus.Slave.RegisterConverter.ToByte(System.Boolean[])">
+            <summary>
+            Unpack 8 boolean values into an unsigned byte
+            </summary>
+            <param name="values">Array with bit values, Length
+            must be 8</param>
+            <returns>Byte value</returns>
+        </member>
+        <member name="M:FieldTalk.Modbus.Slave.RegisterConverter.ToSByte(System.Boolean[])">
+            <summary>
+            Unpack 8 boolean values into a igned byte
+            </summary>
+            <param name="values">Array with bit values, Length
+            must be 8</param>
+            <returns>Byte value</returns>
+        </member>
+    </members>
+</doc>
