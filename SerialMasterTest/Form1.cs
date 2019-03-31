@@ -96,10 +96,6 @@ namespace SerialMasterTest {
         itsw.WriteLine($"{ang1000}, {temprat}");
         outputLBL.Text = $"Inc test run: {incTestCount}, Angle: {ang1000}";
       } else {
-        incTestTMR.Enabled = false;
-        itsw.Flush();
-        itsw.Close();
-        MessageBox.Show("Finished");
         incTestCHB.Checked = false;
       }
     }
@@ -114,6 +110,11 @@ namespace SerialMasterTest {
         incTestCount = 0;
         incTestTMR.Interval = 250;
         incTestTMR.Enabled = true;
+      }  else {
+        incTestTMR.Enabled = false;
+        itsw.Flush();
+        itsw.Close();
+        MessageBox.Show("Finished");
       }
     }
   }

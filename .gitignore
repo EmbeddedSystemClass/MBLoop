@@ -276,3 +276,4 @@ libmbusslave.dll
 ModbusScanner.exe
 ModbusScanner.exe.config
 FieldTalk.Modbus.Master.dll
+/run_dir_master_test/Inctest.csv
