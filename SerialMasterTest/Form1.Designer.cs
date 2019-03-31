@@ -23,6 +23,7 @@
     /// the contents of this method with the code editor.
     /// </summary>
     private void InitializeComponent() {
+      this.components = new System.ComponentModel.Container();
       this.label1 = new System.Windows.Forms.Label();
       this.commPortTB = new System.Windows.Forms.TextBox();
       this.label2 = new System.Windows.Forms.Label();
@@ -36,6 +37,8 @@
       this.writeBTN = new System.Windows.Forms.Button();
       this.readBTN = new System.Windows.Forms.Button();
       this.addressNUD = new System.Windows.Forms.NumericUpDown();
+      this.incTestTMR = new System.Windows.Forms.Timer(this.components);
+      this.incTestCHB = new System.Windows.Forms.CheckBox();
       ((System.ComponentModel.ISupportInitialize)(this.baudNUD)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.devidNUD)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.inputNUD)).BeginInit();
@@ -186,11 +189,27 @@
             0,
             0});
       // 
+      // incTestTMR
+      // 
+      this.incTestTMR.Tick += new System.EventHandler(this.incTestTMR_Tick);
+      // 
+      // incTestCHB
+      // 
+      this.incTestCHB.AutoSize = true;
+      this.incTestCHB.Location = new System.Drawing.Point(24, 201);
+      this.incTestCHB.Name = "incTestCHB";
+      this.incTestCHB.Size = new System.Drawing.Size(112, 17);
+      this.incTestCHB.TabIndex = 13;
+      this.incTestCHB.Text = "Inclinometer tester";
+      this.incTestCHB.UseVisualStyleBackColor = true;
+      this.incTestCHB.CheckedChanged += new System.EventHandler(this.incTestCHB_CheckedChanged);
+      // 
       // Form1
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.ClientSize = new System.Drawing.Size(800, 450);
+      this.Controls.Add(this.incTestCHB);
       this.Controls.Add(this.addressNUD);
       this.Controls.Add(this.readBTN);
       this.Controls.Add(this.writeBTN);
@@ -232,6 +251,8 @@
     private System.Windows.Forms.Button writeBTN;
     private System.Windows.Forms.Button readBTN;
     private System.Windows.Forms.NumericUpDown addressNUD;
+    private System.Windows.Forms.Timer incTestTMR;
+    private System.Windows.Forms.CheckBox incTestCHB;
   }
 }
 

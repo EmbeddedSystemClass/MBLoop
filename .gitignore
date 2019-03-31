@@ -259,3 +259,20 @@ paket-files/
 # Python Tools for Visual Studio (PTVS)
 __pycache__/
 *.pyc
+*.dll
+*.exe
+*.config
+*.pdb
+*.xml
+MBMaster.exe.config
+FieldTalk.Modbus.Master.dll
+FieldTalk.Modbus.Master.xml
+libmbusmaster.dll
+MBMaster.exe
+FieldTalk.Modbus.Master.xml
+FieldTalk.Modbus.Slave.dll
+FieldTalk.Modbus.Slave.xml
+libmbusslave.dll
+ModbusScanner.exe
+ModbusScanner.exe.config
+FieldTalk.Modbus.Master.dll
