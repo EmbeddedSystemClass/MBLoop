@@ -84,20 +84,22 @@ namespace SerialMasterTest {
     private void incTestTMR_Tick(object sender, EventArgs e) {
       int address = (int)addressNUD.Value;
       incTestCount++;
-      if (incTestCount <= 500) {
-        short[] data = new short[3];
-        bool res = serConn.ReadRegisters(address, data.Length, data);
-        byte[] bts = new byte[4];
-        byte[] bts0 = BitConverter.GetBytes(data[0]);
-        byte[] bts1 = BitConverter.GetBytes(data[1]);
-        byte[] ordBts = new byte[] { bts1[0], bts1[1], bts0[0], bts0[1] };
-        int ang1000 = BitConverter.ToInt32(ordBts, 0);
-        double temprat = data[2] / 100.0;
-        itsw.WriteLine($"{ang1000}, {temprat}");
-        outputLBL.Text = $"Inc test run: {incTestCount}, Angle: {ang1000}";
+      short[] data = new short[3];
+      bool res = serConn.ReadRegisters(address, data.Length, data);
+      byte[] bts = new byte[4];
+      byte[] bts0 = BitConverter.GetBytes(data[0]);
+      byte[] bts1 = BitConverter.GetBytes(data[1]);
+      byte[] ordBts = new byte[] { bts1[0], bts1[1], bts0[0], bts0[1] };
+      int ang1000 = BitConverter.ToInt32(ordBts, 0);
+      double temprat = data[2] / 100.0;
+      double ang = 0.0;
+      if (ang1000 > -180000 && ang1000<-90000) {
+          ang = ang1000 / 1000.0 + 270.0;
       } else {
-        incTestCHB.Checked = false;
+          ang = ang1000 / 1000.0 - 90.0;
       }
+      //itsw.WriteLine($"{ang1000/1000.0 - 90.0}, {temprat}");
+      outputLBL.Text = $"Inc test run: {incTestCount}, Angle: {ang}";
     }
 
 
@@ -110,7 +112,7 @@ namespace SerialMasterTest {
         incTestCount = 0;
         incTestTMR.Interval = 250;
         incTestTMR.Enabled = true;
-      }  else {
+      } else {
         incTestTMR.Enabled = false;
         itsw.Flush();
         itsw.Close();
