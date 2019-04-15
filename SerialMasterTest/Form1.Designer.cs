@@ -1,4 +1,7 @@
-﻿namespace SerialMasterTest {
+﻿using System.Collections.Generic;
+using System.Windows.Forms;
+
+namespace SerialMasterTest {
   partial class Form1 {
     /// <summary>
     /// Required designer variable.
@@ -39,10 +42,14 @@
       this.addressNUD = new System.Windows.Forms.NumericUpDown();
       this.incTestTMR = new System.Windows.Forms.Timer(this.components);
       this.incTestCHB = new System.Windows.Forms.CheckBox();
+      this.testObjCB = new System.Windows.Forms.ComboBox();
+      this.label4 = new System.Windows.Forms.Label();
+      this.countNUD = new System.Windows.Forms.NumericUpDown();
       ((System.ComponentModel.ISupportInitialize)(this.baudNUD)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.devidNUD)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.inputNUD)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.addressNUD)).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)(this.countNUD)).BeginInit();
       this.SuspendLayout();
       // 
       // label1
@@ -196,7 +203,7 @@
       // incTestCHB
       // 
       this.incTestCHB.AutoSize = true;
-      this.incTestCHB.Location = new System.Drawing.Point(24, 201);
+      this.incTestCHB.Location = new System.Drawing.Point(29, 223);
       this.incTestCHB.Name = "incTestCHB";
       this.incTestCHB.Size = new System.Drawing.Size(112, 17);
       this.incTestCHB.TabIndex = 13;
@@ -204,11 +211,44 @@
       this.incTestCHB.UseVisualStyleBackColor = true;
       this.incTestCHB.CheckedChanged += new System.EventHandler(this.incTestCHB_CheckedChanged);
       // 
+      // testObjCB
+      // 
+      this.testObjCB.FormattingEnabled = true;
+      this.testObjCB.Location = new System.Drawing.Point(608, 118);
+      this.testObjCB.Name = "testObjCB";
+      this.testObjCB.Size = new System.Drawing.Size(121, 21);
+      this.testObjCB.TabIndex = 14;
+      this.testObjCB.SelectedIndexChanged += new System.EventHandler(this.TestObjCB_SelectedIndexChanged);
+      // 
+      // label4
+      // 
+      this.label4.AutoSize = true;
+      this.label4.Location = new System.Drawing.Point(541, 121);
+      this.label4.Name = "label4";
+      this.label4.Size = new System.Drawing.Size(63, 13);
+      this.label4.TabIndex = 15;
+      this.label4.Text = "Test object:";
+      // 
+      // countNUD
+      // 
+      this.countNUD.Location = new System.Drawing.Point(41, 179);
+      this.countNUD.Name = "countNUD";
+      this.countNUD.Size = new System.Drawing.Size(90, 20);
+      this.countNUD.TabIndex = 16;
+      this.countNUD.Value = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+      // 
       // Form1
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-      this.ClientSize = new System.Drawing.Size(800, 450);
+      this.ClientSize = new System.Drawing.Size(775, 266);
+      this.Controls.Add(this.countNUD);
+      this.Controls.Add(this.label4);
+      this.Controls.Add(this.testObjCB);
       this.Controls.Add(this.incTestCHB);
       this.Controls.Add(this.addressNUD);
       this.Controls.Add(this.readBTN);
@@ -231,6 +271,7 @@
       ((System.ComponentModel.ISupportInitialize)(this.devidNUD)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.inputNUD)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.addressNUD)).EndInit();
+      ((System.ComponentModel.ISupportInitialize)(this.countNUD)).EndInit();
       this.ResumeLayout(false);
       this.PerformLayout();
 
@@ -253,6 +294,9 @@
     private System.Windows.Forms.NumericUpDown addressNUD;
     private System.Windows.Forms.Timer incTestTMR;
     private System.Windows.Forms.CheckBox incTestCHB;
+    private System.Windows.Forms.ComboBox testObjCB;
+    private System.Windows.Forms.Label label4;
+    private NumericUpDown countNUD;
   }
 }
 

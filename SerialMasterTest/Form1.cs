@@ -13,6 +13,9 @@ using System.Windows.Forms;
 namespace SerialMasterTest {
   public partial class Form1 : Form {
     private PLCSerialConnector serConn = null;
+    private enum TestObjEnum { General, Inclinometer, FeederMack };
+
+    private TestObjEnum currTO = TestObjEnum.Inclinometer;
 
     public Form1() {
       InitializeComponent();
@@ -20,6 +23,8 @@ namespace SerialMasterTest {
 
     private void Form1_Load(object sender, EventArgs e) {
       serConn = new PLCSerialConnector();
+      testObjCB.Items.AddRange(Enum.GetNames(typeof(TestObjEnum)));
+      testObjCB.SelectedIndex = 0;
     }
 
     private void Form1_FormClosing(object sender, FormClosingEventArgs e) {
@@ -61,7 +66,7 @@ namespace SerialMasterTest {
       int loops = 1;
       short[] data = null;
       try {
-        data = new short[3];
+        data = new short[(int)countNUD.Value];
         bool res = true;
         sw.Start();
         for (int idx = 0; idx < loops; idx++)
@@ -71,14 +76,20 @@ namespace SerialMasterTest {
         outputLBL.Text = $"Write failed: {ex.Message}";
         return;
       }
-      byte[] bts = new byte[4];
-      byte[] bts0 = BitConverter.GetBytes(data[0]);
-      byte[] bts1 = BitConverter.GetBytes(data[1]);
-      byte[] ordBts = new byte[] { bts1[0], bts1[1], bts0[0], bts0[1] };
-      int ang1000 = BitConverter.ToInt32(ordBts, 0);
-      double temprat = data[2] / 100.0;
-      double rtm = sw.ElapsedMilliseconds * 1.0 / loops;
-      outputLBL.Text = $"Inc: {ang1000 / 1000.0}, Temp: {temprat}, Read time: {rtm}";
+      if (currTO == TestObjEnum.General) {
+        outputLBL.Text = $"Write OK: {string.Join(", ", data.ToList().Select(x => x.ToString()))}";
+      } else if (currTO == TestObjEnum.Inclinometer) {
+        byte[] bts = new byte[4];
+        byte[] bts0 = BitConverter.GetBytes(data[0]);
+        byte[] bts1 = BitConverter.GetBytes(data[1]);
+        byte[] ordBts = new byte[] { bts1[0], bts1[1], bts0[0], bts0[1] };
+        int ang1000 = BitConverter.ToInt32(ordBts, 0);
+        double temprat = data[2] / 100.0;
+        double rtm = sw.ElapsedMilliseconds * 1.0 / loops;
+        outputLBL.Text = $"Inc: {ang1000 / 1000.0}, Temp: {temprat}, Read time: {rtm}";
+      } else if (currTO == TestObjEnum.FeederMack) { 
+      } else
+        outputLBL.Text = "No test object defined";
     }
 
     private void incTestTMR_Tick(object sender, EventArgs e) {
@@ -93,10 +104,10 @@ namespace SerialMasterTest {
       int ang1000 = BitConverter.ToInt32(ordBts, 0);
       double temprat = data[2] / 100.0;
       double ang = 0.0;
-      if (ang1000 > -180000 && ang1000<-90000) {
-          ang = ang1000 / 1000.0 + 270.0;
+      if (ang1000 > -180000 && ang1000 < -90000) {
+        ang = ang1000 / 1000.0 + 270.0;
       } else {
-          ang = ang1000 / 1000.0 - 90.0;
+        ang = ang1000 / 1000.0 - 90.0;
       }
       //itsw.WriteLine($"{ang1000/1000.0 - 90.0}, {temprat}");
       outputLBL.Text = $"Inc test run: {incTestCount}, Angle: {ang}";
@@ -118,6 +129,11 @@ namespace SerialMasterTest {
         itsw.Close();
         MessageBox.Show("Finished");
       }
+    }
+
+    private void TestObjCB_SelectedIndexChanged(object sender, EventArgs e) {
+      if (testObjCB.SelectedIndex >= 0)
+        currTO = (TestObjEnum) testObjCB.SelectedIndex;
     }
   }
 }
