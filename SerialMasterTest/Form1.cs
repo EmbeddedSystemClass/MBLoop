@@ -76,8 +76,8 @@ namespace SerialMasterTest {
         outputLBL.Text = $"Write failed: {ex.Message}";
         return;
       }
-      if (currTO == TestObjEnum.General) {
-        outputLBL.Text = $"Write OK: {string.Join(", ", data.ToList().Select(x => x.ToString()))}";
+      if (currTO == TestObjEnum.General || currTO == TestObjEnum.FeederMack) {
+        outputLBL.Text = $"Read OK: {string.Join(", ", data.ToList().Select(x => x.ToString()))}";
       } else if (currTO == TestObjEnum.Inclinometer) {
         byte[] bts = new byte[4];
         byte[] bts0 = BitConverter.GetBytes(data[0]);
@@ -87,7 +87,6 @@ namespace SerialMasterTest {
         double temprat = data[2] / 100.0;
         double rtm = sw.ElapsedMilliseconds * 1.0 / loops;
         outputLBL.Text = $"Inc: {ang1000 / 1000.0}, Temp: {temprat}, Read time: {rtm}";
-      } else if (currTO == TestObjEnum.FeederMack) { 
       } else
         outputLBL.Text = "No test object defined";
     }
@@ -134,6 +133,16 @@ namespace SerialMasterTest {
     private void TestObjCB_SelectedIndexChanged(object sender, EventArgs e) {
       if (testObjCB.SelectedIndex >= 0)
         currTO = (TestObjEnum) testObjCB.SelectedIndex;
+      mackENBTN.Enabled = currTO == TestObjEnum.FeederMack;
+    }
+
+    private bool mackEnabled = false;
+    private void MackENBTN_Click(object sender, EventArgs e) {
+      mackEnabled = !mackEnabled;
+      short[] data = new short[] {(short)(mackEnabled ? 1 : 0)};
+      bool res = serConn.WriteRegisters(74, 1, data);
+      outputLBL.Text = $"Change to {(mackEnabled ? "Enabled" : "Disabled")} was:  {(res ? "ok" : "Fail")}";
+      mackENBTN.BackColor = mackEnabled ? Color.GreenYellow : Color.LightSalmon;
     }
   }
 }

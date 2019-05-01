@@ -45,6 +45,7 @@ namespace SerialMasterTest {
       this.testObjCB = new System.Windows.Forms.ComboBox();
       this.label4 = new System.Windows.Forms.Label();
       this.countNUD = new System.Windows.Forms.NumericUpDown();
+      this.mackENBTN = new System.Windows.Forms.Button();
       ((System.ComponentModel.ISupportInitialize)(this.baudNUD)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.devidNUD)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.inputNUD)).BeginInit();
@@ -143,8 +144,17 @@ namespace SerialMasterTest {
       // 
       // inputNUD
       // 
-      this.inputNUD.Enabled = false;
       this.inputNUD.Location = new System.Drawing.Point(267, 119);
+      this.inputNUD.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
+      this.inputNUD.Minimum = new decimal(new int[] {
+            10000000,
+            0,
+            0,
+            -2147483648});
       this.inputNUD.Name = "inputNUD";
       this.inputNUD.Size = new System.Drawing.Size(90, 20);
       this.inputNUD.TabIndex = 8;
@@ -241,11 +251,24 @@ namespace SerialMasterTest {
             0,
             0});
       // 
+      // mackENBTN
+      // 
+      this.mackENBTN.BackColor = System.Drawing.Color.LightSalmon;
+      this.mackENBTN.Enabled = false;
+      this.mackENBTN.Location = new System.Drawing.Point(157, 179);
+      this.mackENBTN.Name = "mackENBTN";
+      this.mackENBTN.Size = new System.Drawing.Size(75, 23);
+      this.mackENBTN.TabIndex = 17;
+      this.mackENBTN.Text = "Run feeder";
+      this.mackENBTN.UseVisualStyleBackColor = false;
+      this.mackENBTN.Click += new System.EventHandler(this.MackENBTN_Click);
+      // 
       // Form1
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.ClientSize = new System.Drawing.Size(775, 266);
+      this.Controls.Add(this.mackENBTN);
       this.Controls.Add(this.countNUD);
       this.Controls.Add(this.label4);
       this.Controls.Add(this.testObjCB);
@@ -297,6 +320,7 @@ namespace SerialMasterTest {
     private System.Windows.Forms.ComboBox testObjCB;
     private System.Windows.Forms.Label label4;
     private NumericUpDown countNUD;
+    private Button mackENBTN;
   }
 }
 
