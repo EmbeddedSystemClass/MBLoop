@@ -68,7 +68,7 @@ namespace SerialMasterTest {
       this.commPortTB.Name = "commPortTB";
       this.commPortTB.Size = new System.Drawing.Size(100, 20);
       this.commPortTB.TabIndex = 1;
-      this.commPortTB.Text = "COM4";
+      this.commPortTB.Text = "COM6";
       // 
       // label2
       // 
@@ -108,7 +108,7 @@ namespace SerialMasterTest {
       this.devidNUD.Size = new System.Drawing.Size(120, 20);
       this.devidNUD.TabIndex = 5;
       this.devidNUD.Value = new decimal(new int[] {
-            100,
+            1,
             0,
             0,
             0});
@@ -144,7 +144,7 @@ namespace SerialMasterTest {
       // 
       // inputNUD
       // 
-      this.inputNUD.Location = new System.Drawing.Point(267, 119);
+      this.inputNUD.Location = new System.Drawing.Point(420, 119);
       this.inputNUD.Maximum = new decimal(new int[] {
             1000000,
             0,
@@ -241,7 +241,7 @@ namespace SerialMasterTest {
       // 
       // countNUD
       // 
-      this.countNUD.Location = new System.Drawing.Point(41, 179);
+      this.countNUD.Location = new System.Drawing.Point(269, 119);
       this.countNUD.Name = "countNUD";
       this.countNUD.Size = new System.Drawing.Size(90, 20);
       this.countNUD.TabIndex = 16;

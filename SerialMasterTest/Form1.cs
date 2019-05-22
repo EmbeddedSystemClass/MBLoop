@@ -13,7 +13,7 @@ using System.Windows.Forms;
 namespace SerialMasterTest {
   public partial class Form1 : Form {
     private PLCSerialConnector serConn = null;
-    private enum TestObjEnum { General, Inclinometer, FeederMack };
+    private enum TestObjEnum { General, Inclinometer, FeederMack, AVSensor };
 
     private TestObjEnum currTO = TestObjEnum.Inclinometer;
 
@@ -87,6 +87,17 @@ namespace SerialMasterTest {
         double temprat = data[2] / 100.0;
         double rtm = sw.ElapsedMilliseconds * 1.0 / loops;
         outputLBL.Text = $"Inc: {ang1000 / 1000.0}, Temp: {temprat}, Read time: {rtm}";
+      } else if (currTO == TestObjEnum.AVSensor) {
+        byte[] bts = new byte[4];
+        byte[] btsv0 = BitConverter.GetBytes(data[0]);
+        byte[] btsv1 = BitConverter.GetBytes(data[1]);
+        byte[] btsi0 = BitConverter.GetBytes(data[2]);
+        byte[] btsi1 = BitConverter.GetBytes(data[3]);
+        byte[] ordBts = new byte[] { btsv0[0], btsv0[1], btsv1[0], btsv1[1] };
+        float voltRead = BitConverter.ToSingle(ordBts, 0);
+        ordBts = new byte[] { btsi0[0], btsi0[1], btsi1[0], btsi1[1] };
+        float currentRead = BitConverter.ToSingle(ordBts, 0);
+        outputLBL.Text = $"AVSensor,  V: {voltRead}    C:{currentRead}";
       } else
         outputLBL.Text = "No test object defined";
     }
